@@ -1,7 +1,7 @@
 ## Inheritance program
 
 Learning outcomes highlights: 
-- learning how ro derive a class
+- know how to derive from a base class
 - undertand the overriding 
 
 **Problem:** The Account class is designed to represent customers’ bank accounts (base class). It includes a data member (of type double) to represent the account balance. This class provides a constructor that receives an initial balance and uses it to initialize the data member. 
