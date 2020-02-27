@@ -1,89 +1,107 @@
-## Reverse File program
+## Inheritance program
 
 Learning outcomes highlights: 
-- dynamic memory allocation
-- file operations
-- array of pointers
+- learning how ro derive a class
+- undertand the overriding 
 
-**Problem:** Write a program to get two file names as command-line arguments. The input file has one string in each line (without space). The program writes the input file strings in the output file in a reverse order. The program can be used as follows: 
+**Problem:** The Account class is designed to represent customers’ bank accounts (base class). It includes a data member (of type double) to represent the account balance. This class provides a constructor that receives an initial balance and uses it to initialize the data member. 
 
-./rev_file infile.txt outfile.txt (create outfile.txt)
-
-The starter code is written for you. You just need to insert your code as instructed.
-
-
+# Account Class
+## Account.h 
 ```C++
+#ifndef ACCOUNT_H
+#define ACCOUNT_H
+
 #include <iostream>
-#include <fstream>
-#include <cstring>
+
+using namespace std;
+   
+class Account{
+	private:
+		double balance; // data member that stores the balance
+
+	protected:
+		double getBalance() const; // return the account balance
+		void setBalance( double ); // sets the account balance
+
+		public:
+		Account( double = 0.0); // constructor initializes balance
+	
+		virtual void credit(double);
+
+		virtual bool debit(double);
+
+		virtual void display(ostream &) const; 					
+};
+
+#endif
+```
+## Account.cpp 
+```C++
+#include "Account.h"
 
 using namespace std;
 
-void freadnames(ifstream &, char * []);
-void fwritenames_reverse(ofstream &,char * []);
-void freenames(char * []);
-
-
-int main(int argc, char *argv[])
+Account::Account( double initialBalance)
 {
-	char *list[100];
-    
-    if(argc != 3){
-    	cerr << "Number of argument is not correct!" << endl;
-    	return 1;
-    }
+	if( initialBalance >= 0.0 )
+		balance = initialBalance;
+	else 
+		balance = 0.0;
+}	
 
-	ifstream fin(argv[1]);
-	if(fin.fail()){
-		cerr << "Cannot open the input file!" << endl;
-		return 1;
-	}
-
-	ofstream fout(argv[2]);
-	if(fin.fail()){
-		cerr << "Cannot open the output file!" << endl;
-		return 1;
-	}
-
-	freadnames(fin,list);
-	fwritenames_reverse(fout,list);
-	freenames(list);
-	
-	fin.close();
-	fout.close();
-	
-	return 0; 
-}
-
-void freadnames(ifstream &f,char *list [])
+//credit (add) an amount to the account balance
+void Account::credit( double amount )
 {
-	char x[200];
+	balance = balance + amount; 
+} 
 
-	int i = 0;
-
-	// write a while loop to read one string form the input file and put it in x till the end file
-		// inside the loop allocate the dynamic array for list[i]
-		// copy string stored in x to list[i] array using strcpy
-		// increment i 
-
-	list[i] = nullptr;  // IMPORTANT: we put the null to the last pointer in list to mark the last element in list
-}
-void fwritenames_reverse(ofstream &f,char *list [])
+//debit (subtract) an amount from the account balance return bool indicating whether money was debited
+bool Account::debit( double amount )
 {
-	int i;
-	for(i = 0; list[i] != nullptr ; ++i)
-		;
-
-	for(int j = i-1; j >= 0 ; --j)
-	{
-		// your code is here
+	if ( amount > balance ){
+		return false;
+	} else{
+		balance = balance - amount;
+		return true;
 	}
 }
-void freenames(char *list [])
+
+double Account::getBalance() const
 {
-	for (int i = 0; list[i] != nullptr; ++i)
-	{
-		delete [] list[i];;
-	}
-}
+	return balance;
+} 
+
+void Account::setBalance( double newBalance )
+{
+	balance = newBalance;
+} 
+
+void Account::display(ostream & out) const
+{
+	out << "None " << endl;
+} 					
 ```
+# Part1: SavingAccount Class
+Derived class SavingsAccount that inherits the functionality of an Account, but also include a data member of type double indicating the interest rate (for example 0.12) assigned to the Account (interestRate). 
+* Write the SavingsAccount’s constructor that receives the initial balance, as well as an initial value for the SavingsAccount’s interest rate, and then initializes the object. If interest rate is less than zero, the interestRate will be set to zero. 
+* Override the display function in the Account class that prints a SavingsAccount in the following format (this is an example):
+Account type: Saving
+Balance: $ 400.00
+Interest Rate (%): 12.00
+
+
+```C++
+
+```
+# Part2: CheckingAccount Class
+Derive class CheckingAccount that inherits from base class Account and include an additional data member of type double that represents the fee charged per transaction (transactionFee). 
+* Write CheckingAccount’s constructor that receives the initial balance, as well as a parameter indicating a transaction fee amount. If transaction fee is less than zero, the transactionFee will be set to zero. 
+* Write the chargeFee member function that updates the balance by deducting the transactionFee from the balance. 
+Override member functions debit for class CheckingAccount so that it subtracts the transactionFee from the account balance (call chargeFee). If the operation is successful, it will return true otherwise it does nothing and will return false (debit is successful if the amount is not greater than the balance). CheckingAccount’s versions of this function should invoke the base-class Account version to perform the debit operation.
+ * Hint: Define Account’s debit function so that it returns a bool indicating whether money was withdrawn. Then use the return value to determine whether a fee should be charged.
+* Override member functions credit for class CheckingAccount so that it subtracts the transactionFee from the account balance (call chargeFee). CheckingAccount’s versions of this function should invoke the base-class Account version to perform the credit operation. 
+* Override the display function in the Account class that prints a CheckingAccount in the following format (example):
+Account type: Checking
+Balance: $ 400.00
+Transaction Fee: 1.00
