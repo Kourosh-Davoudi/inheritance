@@ -86,13 +86,10 @@ void Account::display(ostream & out) const
 Derived class SavingsAccount that inherits the functionality of an Account, but also include a data member of type double indicating the interest rate (for example 0.12) assigned to the Account (interestRate). 
 * Write the SavingsAccount’s constructor that receives the initial balance, as well as an initial value for the SavingsAccount’s interest rate, and then initializes the object. If interest rate is less than zero, the interestRate will be set to zero. 
 * Override the display function in the Account class that prints a SavingsAccount in the following format (this is an example):
+```C++
 Account type: Saving
 Balance: $ 400.00
 Interest Rate (%): 12.00
-
-
-```C++
-
 ```
 # Part2: CheckingAccount Class
 Derive class CheckingAccount that inherits from base class Account and include an additional data member of type double that represents the fee charged per transaction (transactionFee). 
@@ -102,6 +99,8 @@ Override member functions debit for class CheckingAccount so that it subtracts t
  * Hint: Define Account’s debit function so that it returns a bool indicating whether money was withdrawn. Then use the return value to determine whether a fee should be charged.
 * Override member functions credit for class CheckingAccount so that it subtracts the transactionFee from the account balance (call chargeFee). CheckingAccount’s versions of this function should invoke the base-class Account version to perform the credit operation. 
 * Override the display function in the Account class that prints a CheckingAccount in the following format (example):
+```C++
 Account type: Checking
 Balance: $ 400.00
 Transaction Fee: 1.00
+```
