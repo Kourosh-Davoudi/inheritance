@@ -96,7 +96,7 @@ Derive class CheckingAccount that inherits from base class Account and include a
 * Write CheckingAccount’s constructor that receives the initial balance, as well as a parameter indicating a transaction fee amount. If transaction fee is less than zero, the transactionFee will be set to zero. 
 * Write the chargeFee member function that updates the balance by deducting the transactionFee from the balance. 
 Override member functions debit for class CheckingAccount so that it subtracts the transactionFee from the account balance (call chargeFee). If the operation is successful, it will return true otherwise it does nothing and will return false (debit is successful if the amount is not greater than the balance). CheckingAccount’s versions of this function should invoke the base-class Account version to perform the debit operation.
- * Hint: Define Account’s debit function so that it returns a bool indicating whether money was withdrawn. Then use the return value to determine whether a fee should be charged.
+  * Hint: Define Account’s debit function so that it returns a bool indicating whether money was withdrawn. Then use the return value to determine whether a fee should be charged.
 * Override member functions credit for class CheckingAccount so that it subtracts the transactionFee from the account balance (call chargeFee). CheckingAccount’s versions of this function should invoke the base-class Account version to perform the credit operation. 
 * Override the display function in the Account class that prints a CheckingAccount in the following format (example):
 ```C++
