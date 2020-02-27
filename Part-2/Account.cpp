@@ -37,7 +37,7 @@ void Account::setBalance( double newBalance )
 	balance = newBalance;
 } 
 
-void Account::display(ostream & out)
+void Account::display(ostream & out) const
 {
 } 					
 
