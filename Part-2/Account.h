@@ -23,7 +23,7 @@ class Account{
 		virtual bool debit(double);
 
 		// TODO: Write a function prototype for virtual function display
-		virtual void display(ostream &); 					
+		virtual void display(ostream &) const; 					
 };
 
 #endif
