@@ -4,7 +4,7 @@ Learning outcomes highlights:
 - know how to derive from a base class
 - undertand the overriding 
 
-**Problem:** The Account class is designed to represent customers’ bank accounts (base class). It includes a data member (of type double) to represent the account balance. This class provides a constructor that receives an initial balance and uses it to initialize the data member. 
+**Problem:** The <code>Account</code> class is designed to represent customers’ bank accounts (base class). It includes a data member (of type double) to represent the account balance. This class provides a constructor that receives an initial balance and uses it to initialize the data member. 
 
 # Account Class
 ## Account.h 
@@ -83,9 +83,9 @@ void Account::display(ostream & out) const
 } 					
 ```
 # Part1: SavingAccount Class
-Derived class SavingsAccount that inherits the functionality of an Account, but also include a data member of type double indicating the interest rate (for example 0.12) assigned to the Account (interestRate). 
+Derived class <code>SavingsAccount</code> that inherits the functionality of an Account, but also include a data member of type double indicating the interest rate (for example 0.12) assigned to the Account (<code>interestRate</code>). 
 * Write the SavingsAccount’s constructor that receives the initial balance, as well as an initial value for the SavingsAccount’s interest rate, and then initializes the object. If interest rate is less than zero, the interestRate will be set to zero. 
-* Override the display function in the Account class that prints a SavingsAccount in the following format (this is an example):
+* Override the <code>display</code> function in the Account class that prints a SavingsAccount in the following format (this is an example):
 ```C++
 Account type: Saving
 Balance: $ 400.00
